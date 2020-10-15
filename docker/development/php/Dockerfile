@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7-fpm
 
 # Install modules
 RUN apt-get update && apt-get install -y \
@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y \
         git \
         libzip-dev \
         zip \
-        unzip
+        unzip \
+        libonig-dev
 
 RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install mbstring
@@ -32,7 +33,7 @@ RUN docker-php-ext-install zip
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN apt-get install -y gnupg gnupg2 gnupg1
-RUN curl -sL https://deb.nodesource.com/setup_13.x | bash
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update
